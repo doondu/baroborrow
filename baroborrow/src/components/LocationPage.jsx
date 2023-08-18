@@ -1,74 +1,98 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./LocationPage.module.css";
 import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 import { ROUTES, LocationNameByKey } from "../constants/routes";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
+import axios from "axios";
 
 const LocationPage = () => {
   const navigate = useNavigate();
+  const [dataList, setDataList] = useState([]);
+  const [councilDataList, setCouncilDataList] = useState([]);
   const { location: locationName } = useParams();
-  let headerName = "대충오딘가";
+  let headerName = "가천관";
+
+  function getNotice() {
+    axios
+      .get("https://tsyang.pythonanywhere.com/posts/?location=가천대학교")
+      .then((response) => {
+        setDataList([...response.data]);
+        console.log(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
+    axios
+      .get(
+        "https://tsyang.pythonanywhere.com/council_posts/?location=가천대학교"
+      )
+      .then((response) => {
+        setCouncilDataList([...response.data]);
+        console.log(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+  useEffect(() => {
+    getNotice();
+  }, []);
   if (!!LocationNameByKey[locationName]) {
     headerName = LocationNameByKey[locationName];
   }
+
   return (
     <div className={styles.page}>
       <div
         style={{
-          position: "fixed",
+          //position: "fixed",
           top: 0,
           left: 0,
           width: "100%",
           height: "4rem",
           lineHeight: "4rem",
           textAlign: "center",
-          fontSize: "2rem",
-          backgroundColor: "#339af0",
-          boxShadow: "rgba(0, 0, 0, 0.2) 0px 2px 20px 0px",
-          zIndex: 1,
+          fontSize: "3rem",
+          fontfamily: "Arial, sans-serif",
+          //padding-top: "50px",
+          //   backgroundColor: "royalblue",
+          //   boxShadow: "rgba(0, 0, 0, 0.2) 0px 2px 20px 0px",
+          //   zIndex: 1,
+          color: "royalblue",
+          marginbottom: "100px",
         }}
       >
         {headerName}
+        <button type="submit" style={{ float: "right" }}>
+          글작성
+        </button>
       </div>
 
-      <div style={{ marginTop: "5rem" }}>
-        <div className="list">
-          <Item
-            productName="가위"
-            roomNo="407호"
-            ableTimeStart="15:00"
-            ableTimeEnd="17:00"
-            from="학생회"
-          />
-          <Item
-            productName="가위"
-            roomNo="407호"
-            ableTimeStart="15:00"
-            ableTimeEnd="17:00"
-            from="학생회"
-          />
-          <Item
-            productName="가위"
-            roomNo="407호"
-            ableTimeStart="15:00"
-            ableTimeEnd="17:00"
-            from="학생회"
-          />
-          <Item
-            productName="가위"
-            roomNo="407호"
-            ableTimeStart="15:00"
-            ableTimeEnd="17:00"
-            from="학생회"
-          />
-          <Item
-            productName="가위"
-            roomNo="407호"
-            ableTimeStart="15:00"
-            ableTimeEnd="17:00"
-            from="학생회"
-          />
-        </div>
+      <div style={{ marginTop: "2.5rem" }}>
+        <ul className="list">
+          {councilDataList.map((e) => (
+            <Item
+              key={e.pk}
+              id={e.pk}
+              title={e.title}
+              category={e.category}
+              location={e.council}
+            />
+          ))}
+          <br></br>
+          <br></br>
+          <br></br>
+          {dataList.map((e) => (
+            <Item
+              key={e.pk}
+              id={e.pk}
+              title={e.title}
+              category={e.category}
+              location={e.location}
+            />
+          ))}
+        </ul>
       </div>
     </div>
   );
@@ -78,19 +102,19 @@ const Item = (props) => {
   const navigate = useNavigate();
   return (
     <div
-      onClick={() => {
-        navigate(ROUTES.watch);
-      }}
+      // onClick={() => {
+      //   navigate(ROUTES.watch);
+      // }}
       style={{
         border: "solid 1px #333",
         borderRadius: "3px",
         boxShadow: "0px 0px 2px #ccc",
         position: "relative",
-        height: "calc(100px + 1rem)",
+        height: "calc(100px + 3rem)",
       }}
       className="item-wrapper"
     >
-      <div
+      {/* <div
         className="item-leftside"
         style={{
           position: "absolute",
@@ -102,26 +126,30 @@ const Item = (props) => {
         }}
       >
         <img style={{ width: "100%", height: "100%" }} src={props.imgSrc} />
-      </div>
+      </div> */}
       <div
         className="item-rightsize"
         style={{
-          paddingLeft: "calc(150px + 1.5rem)",
+          padding: "1rem",
         }}
       >
-        <div className="item-title">{props.title}</div>
         <div className="item-content">
           <div className="item-product-name" style={{ fontSize: "2rem" }}>
-            {props.productName}
+            <Link
+              style={{
+                color: "#000000",
+                textDecoration: "none",
+              }}
+              to={`/watch/${props.id}`}
+            >
+              {props.title}
+            </Link>
           </div>
           <div className="item-room-no" style={{ fontSize: "1.25rem" }}>
-            {props.roomNo}
-          </div>
-          <div className="item-able-time" style={{ fontSize: "1.125rem" }}>
-            {props.ableTimeStart} ~ {props.ableTimeEnd}
+            {props.category}
           </div>
           <div className="item-from" style={{ fontSize: "1.25rem" }}>
-            {props.from}
+            {props.location}
           </div>
         </div>
       </div>

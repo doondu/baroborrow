@@ -3,13 +3,20 @@ import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 import styles from "./Main.module.css";
 import axios from "axios";
 import { ROUTES } from "../constants/routes";
+import Cookies from "js-cookie";
 
 const Main = () => {
+  const token = Cookies.get("token");
   const navigate = useNavigate();
 
-  const [logCookie, setLogCookie] = useState(false);
+  const [notAllow, setNotAllow] = useState(false);
 
   const loginCheck = () => {
+    if (token) {
+      setNotAllow(true);
+    } else {
+      setNotAllow(false);
+    }
     //로그인 여부따라 변경되는 MainPage 우측 상단 버튼 2개
   };
   const handleMoveLogin = () => {
@@ -21,29 +28,38 @@ const Main = () => {
   const handleMoveWrite = () => {
     navigate(ROUTES.write);
   };
-
+  const handleMoveMyPage = () => {
+    navigate(ROUTES.mypage);
+  };
+  useEffect(() => {
+    loginCheck();
+  }, []);
   return (
     <div className={styles.page}>
       <div className="contentWrap">
         <div className="buttonWrap">
           <span className={styles.login}>
-            <button
-              onClick={handleMoveLogin}
-              disabled={logCookie}
-              className="topButton"
-            >
-              Login
-            </button>
+            {notAllow ? (
+              <button onClick={handleMoveMyPage} className="topButton">
+                MyPage
+              </button>
+            ) : (
+              <button onClick={handleMoveLogin} className="topButton">
+                Login
+              </button>
+            )}
           </span>
 
           <span className={styles.signin}>
-            <button
-              onClick={handleMoveSignin}
-              disabled={logCookie}
-              className="topButton"
-            >
-              Sign In
-            </button>
+            {notAllow ? (
+              <button onClick={handleMoveSignin} className="topButton">
+                Sign Out
+              </button>
+            ) : (
+              <button onClick={handleMoveSignin} className="topButton">
+                Sign In
+              </button>
+            )}
           </span>
         </div>
       </div>

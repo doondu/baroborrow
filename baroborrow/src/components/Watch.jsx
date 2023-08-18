@@ -1,16 +1,49 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ROUTES } from "../constants/routes";
+import { useParams } from "react-router-dom";
+import styles from "./Watch.module.css";
+import axios from "axios";
+import Cookies from "js-cookie";
 
 function PostDetail() {
+  const { postId } = useParams();
   const [selectedCategory, setSelectedCategory] = useState("");
   const [content, setContent] = useState("");
   const [comments, setComments] = useState([]); // 댓글 배열
-
+  const [data, setData] = useState("");
+  const [profile, setProfile] = useState({});
   const [isEditMode, setIsEditMode] = useState(false);
 
-  const [commentText, setCommentText] = useState(""); // 댓글 내용
-  const [commentAuthor, setCommentAuthor] = useState("사용자1"); // 댓글 작성자
+  const [commentList, setCommentList] = useState([]);
+  const [commentText, setCommentText] = useState("");
 
+  function getNotice() {
+    axios
+      .get(`https://tsyang.pythonanywhere.com/posts/${postId}`)
+      .then((response) => {
+        setData(response.data);
+        setProfile(response.data.profile);
+        console.log(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+  function getCommets() {
+    axios
+      .get(`https://tsyang.pythonanywhere.com/comments/?post=${postId}`)
+      .then((response) => {
+        setCommentList([...response.data]);
+        console.log(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+  useEffect(() => {
+    getNotice();
+    getCommets();
+  }, []);
   const handleCategoryClick = (category) => {
     if (isEditMode) {
       setSelectedCategory(category);
@@ -26,71 +59,61 @@ function PostDetail() {
     // 변경된 카테고리와 내용을 저장하는 로직 추가 가능
   };
 
-  const handleCommentSubmit = () => {
-    if (commentText) {
-      const newComment = `${commentAuthor}: ${commentText}`;
-      setComments([...comments, newComment]);
-      setCommentText("");
+  const handleCommentSubmit = async (e) => {
+    // e.preventDefault();
+
+    try {
+      const response = await axios.post(
+        "https://tsyang.pythonanywhere.com/comments/",
+        {
+          postid: postId,
+          text: commentText,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Token " + Cookies.get("token"),
+          },
+        }
+      );
+      getCommets();
+    } catch (error) {
+      console.log("Error: ", error);
     }
   };
 
   return (
     <div className>
       <header>
-        <h1>게시물 제목</h1>
-        <p>작성자: 작성자 이름</p>
-        {isEditMode ? (
-          <select
-            value={selectedCategory}
-            onChange={(e) => setSelectedCategory(e.target.value)}
-          >
-            <option value="도서">도서</option>
-            <option value="학용품">학용품</option>
-            <option value="기타">기타</option>
-          </select>
-        ) : (
-          <p>카테고리: {selectedCategory || "카테고리를 선택해주세요"}</p>
-        )}
+        <h1 className={styles.textblue400}>{data.title}</h1>
+        <hr></hr>
+        <h1>{data.title}</h1>
+        <p>{profile.title}</p>
+        <p className={styles.textdetail}>작성자: {profile.nickname}</p>
       </header>
       <main>
-        {isEditMode ? (
-          <textarea
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
-            className="content-box"
-          />
-        ) : (
-          <div className="content-box" onClick={handleEditButtonClick}>
-            {content || "게시물 내용이 여기에 들어갑니다."}
-          </div>
-        )}
-      </main>
-      {isEditMode && (
-        <div className="category-buttons">
-          <button onClick={() => handleCategoryClick("도서")}>도서</button>
-          <button onClick={() => handleCategoryClick("학용품")}>학용품</button>
-          <button onClick={() => handleCategoryClick("기타")}>기타</button>
+        <div className={styles.contentbox} onClick={handleEditButtonClick}>
+          {data.body}
         </div>
-      )}
-      {isEditMode ? (
-        <button onClick={handleSaveButtonClick}>저장</button>
-      ) : (
-        <button id="editButton" onClick={handleEditButtonClick}>
-          수정
-        </button>
-      )}
-      <div className="comments">
+      </main>
+      <div className={styles.comments}>
         <h2>댓글</h2>
         <ul>
-          {comments.map((comment, index) => (
-            <li key={index}>{comment}</li>
+          {commentList.map((e) => (
+            <li key={e.pk}>
+              <span>{e.profile.nickname}</span>
+              <span>:</span>
+              <span>{e.text}</span>
+            </li>
           ))}
         </ul>
         <input
           type="text"
           placeholder="댓글 작성…"
           value={commentText}
-          onChange={(e) => setCommentText(e.target.value)}
+          onChange={(e) => {
+            setCommentText(e.target.value);
+          }}
           onKeyPress={(e) => {
             if (e.key === "Enter") {
               handleCommentSubmit();

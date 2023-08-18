@@ -9,8 +9,6 @@ import Mypage from "./Mypage";
 import LocationPage from "./LocationPage";
 import Watch from "./Watch";
 
-/* import Watch from "./Watch"; */
-
 function App() {
   return (
     <BrowserRouter>
@@ -21,7 +19,8 @@ function App() {
         <Route path={ROUTES.write} element={<Write />} />
         <Route path={ROUTES.mypage} element={<Mypage />} />
         <Route path={ROUTES.locationga} element={<LocationPage />} />
-        <Route path={ROUTES.watch} element={<Watch />} />
+        {/* <Route path={ROUTES.watch} element={<Watch />} /> */}
+        <Route path={"/watch/:postId"} element={<Watch />} />
       </Routes>
     </BrowserRouter>
   );

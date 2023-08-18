@@ -3,16 +3,43 @@ import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 import axios from "axios";
 import styles from "./Login.module.css";
 import { ROUTES } from "../constants/routes";
+import Cookies from "js-cookie";
 
 export default function LoginForm() {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = (e) => {
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // 여기에 로그인 처리 로직을 추가할 수 있습니다.
-    console.log("로그인 정보:", name, password);
+    try {
+      const response = await axios.post(
+        "https://tsyang.pythonanywhere.com/users/login/",
+        {
+          username: name,
+          password: password,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      if (response.status === 200) {
+        const token = response.data.token;
+        const userid = response.data.userid;
+
+        Cookies.set("token", token, { expires: 7 });
+        Cookies.set("userid", userid, { expires: 7 });
+        console.log("Token received and saved: ", token);
+        navigate("/");
+      }
+    } catch (error) {
+      console.log("Error: ", error);
+    }
   };
 
   return (

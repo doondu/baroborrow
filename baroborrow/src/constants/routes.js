@@ -1,4 +1,5 @@
 export const ROUTES = {
+  main: "/main",
   location: "/location/:location",
   locationga: "/locationpage",
   mypage: "/mypage",
