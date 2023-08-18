@@ -1,0 +1,21 @@
+.page {
+    width: 1727px;
+    height: 1440px;
+    background: #FFF;
+}
+.header {
+    width: 584px;
+    height: 142px;
+    flex-shrink: 0;
+    color: #000;
+    font-family: Inter;
+    font-size: 120px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+.login
+.signin {
+    display: inline-block;
+  }
+
