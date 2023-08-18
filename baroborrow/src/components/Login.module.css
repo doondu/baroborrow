@@ -1,0 +1,68 @@
+.container {
+  text-align: center;
+  padding: 50px;
+}
+* {
+  margin: 0 auto;
+}
+.signform {
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+  width: 500px;
+}
+
+.signinput {
+  display: block;
+  margin: 10px auto;
+  padding: 10px;
+  width: 400px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.signbutton {
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  background-color: #3498db;
+  color: white;
+  cursor: pointer;
+}
+
+.signbutton:hover {
+  background-color: #2980b9;
+}
+
+.loginform {
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+  width: 500px;
+}
+
+.logininput {
+  display: block;
+  margin: 10px auto;
+  padding: 10px;
+  width: 400px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.loginbutton {
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  background-color: #3498db;
+  color: white;
+  cursor: pointer;
+}
+
+.loginbutton:hover {
+  background-color: #2980b9;
+}

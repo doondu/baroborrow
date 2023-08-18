@@ -1,0 +1,44 @@
+.container {
+  text-align: center;
+  padding: 50px;
+}
+* {
+  margin: 0 auto;
+}
+.writeform {
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+  width: 500px;
+}
+
+.writeinput {
+  display: block;
+  margin: 10px auto;
+  padding: 10px;
+  width: 400px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.writeinner {
+  text-align: left;
+  display: table-row;
+  margin: 10px auto;
+  padding: 12px;
+  width: 400px;
+}
+.cell {
+  display: "table-cell";
+  padding: 12px;
+}
+.writebutton {
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  background-color: #3498db;
+  color: white;
+  cursor: pointer;
+}
