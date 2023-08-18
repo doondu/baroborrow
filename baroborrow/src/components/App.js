@@ -6,8 +6,9 @@ import Login from "./Login";
 import Signin from "./Signin";
 import Write from "./Write";
 import Mypage from "./Mypage";
-/* import Location from "./Location";
-import Watch from "./Watch"; */
+import LocationPage from "./LocationPage";
+
+/* import Watch from "./Watch"; */
 
 function App() {
   return (
@@ -18,8 +19,9 @@ function App() {
         <Route path={ROUTES.signin} element={<Signin />} />
         <Route path={ROUTES.write} element={<Write />} />
         <Route path={ROUTES.mypage} element={<Mypage />} />
+        <Route path={ROUTES.location} element={<LocationPage />} />
         {/* <Route path={ROUTES.watch} element={<Watch />} />
-        <Route path={ROUTES.location} element={<Location />} /> */}
+ */}
       </Routes>
     </BrowserRouter>
   );
