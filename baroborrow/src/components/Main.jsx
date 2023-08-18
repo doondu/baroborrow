@@ -5,7 +5,7 @@ import axios from "axios";
 import { ROUTES } from "../constants/routes";
 
 const Main = () => {
-  const movePage = useNavigate();
+  const navigate = useNavigate();
 
   const [logCookie, setLogCookie] = useState(false);
 
@@ -13,15 +13,16 @@ const Main = () => {
     //로그인 여부따라 변경되는 MainPage 우측 상단 버튼 2개
   };
   const handleMoveLogin = () => {
-    movePage(ROUTES.login);
+    navigate(ROUTES.login);
   };
   const handleMoveSignin = () => {
-    movePage(ROUTES.signin);
+    navigate(ROUTES.signin);
   };
   const handleMoveWrite = () => {
-    movePage(ROUTES.write);
+    navigate(ROUTES.write);
   };
 
+  
   return (
     <div className={styles.page}>
       <div className="contentWrap">
@@ -65,7 +66,9 @@ const Main = () => {
         <button className={styles.mapButton4}>교대</button>
         <button className={styles.mapButton5}>예체대</button>
         <button className={styles.mapButton6}>글센&공대1&산협2</button>
-        <button className={styles.mapButton7}>가천관</button>
+        <button className={styles.mapButton7} onClick={() => {
+          navigate(`${ROUTES.location}/gachongwan`)
+        }}>가천관</button>
         <button className={styles.mapButton8}>전정도</button>
         <button className={styles.mapButton9}>바나연</button>
         <button className={styles.mapButton10}>비타</button>
