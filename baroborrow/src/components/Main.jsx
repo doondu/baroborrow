@@ -24,8 +24,6 @@ const Main = () => {
 
   return (
     <div className={styles.page}>
-      <header>빌려보나우</header>
-
       <div className="contentWrap">
         <div className="buttonWrap">
           <span className={styles.login}>
@@ -49,17 +47,29 @@ const Main = () => {
           </span>
         </div>
       </div>
-      <body>
-        <div
-          style={{
-            backgroundImage: "url(" + require("../image/map.png") + ")",
-          }}
-        >
-          <button onClick={handleMoveWrite} className="mapButton">
-            Write
-          </button>
-        </div>
-      </body>
+
+      <br></br>
+
+      <header className={`${styles.header} ${styles.headerText}`}>
+        빌려보나우
+      </header>
+      <br></br>
+      <br></br>
+      <div
+        className={styles.map}
+        style={{ backgroundImage: "url(" + require("../image/map.png") + ")" }}
+      >
+        <button className={styles.mapButton1}>기숙사</button>
+        <button className={styles.mapButton2}>AI관</button>
+        <button className={styles.mapButton3}>중도&학생회관</button>
+        <button className={styles.mapButton4}>교대</button>
+        <button className={styles.mapButton5}>예체대</button>
+        <button className={styles.mapButton6}>글센&공대1&산협2</button>
+        <button className={styles.mapButton7}>가천관</button>
+        <button className={styles.mapButton8}>전정도</button>
+        <button className={styles.mapButton9}>바나연</button>
+        <button className={styles.mapButton10}>비타</button>
+      </div>
     </div>
   );
 };

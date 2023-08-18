@@ -1,0 +1,126 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f7f7f7;
+}
+
+/* 웹페이지 이름 스타일 */
+.webpageTitle {
+  text-align: center;
+  font-size: 32px;
+  margin-top: 20px;
+}
+
+/* 프로필 섹션 스타일 */
+.profile {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+  margin-left: 20px;
+  padding: 20px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.profileImage {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 10px;
+}
+
+.profileInfo {
+  display: flex;
+  flex-direction: column;
+  margin-left: 20px;
+}
+
+.profile h2 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.profile button {
+  margin-top: 5px;
+  padding: 5px 10px;
+  font-size: 14px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.profile button:hover {
+  background-color: #0056b3;
+}
+
+/* 작성한 글/댓글 섹션 스타일 */
+.userContent {
+  display: flex;
+  margin-top: 20px;
+  padding: 20px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.userContentLeft,
+.userContentRight {
+  flex: 1;
+  padding: 10px;
+}
+
+.userContentLeft h3,
+.userContentRight h3 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.userContent ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.userContent li {
+  margin: 0;
+  padding: 0;
+  background-color: #eeeeee;
+  width: 100%;
+  height: 30px;
+  line-height: 30px;
+  text-align: left;
+}
+
+.userContent li:nth-child(2n) {
+  margin: 0;
+  padding: 0;
+  background-color: white;
+  width: 100%;
+  /* height:30px; */
+}
+
+.userContent li a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.userContent li a:hover {
+  text-decoration: underline;
+}
+
+.userContentSpan {
+  display: inline-block;
+  width: fit-content;
+  margin-left: 10px;
+}
+.Count {
+  margin-left: 20px;
+}
