@@ -22,7 +22,6 @@ const Main = () => {
     navigate(ROUTES.write);
   };
 
-  
   return (
     <div className={styles.page}>
       <div className="contentWrap">
@@ -66,9 +65,14 @@ const Main = () => {
         <button className={styles.mapButton4}>교대</button>
         <button className={styles.mapButton5}>예체대</button>
         <button className={styles.mapButton6}>글센&공대1&산협2</button>
-        <button className={styles.mapButton7} onClick={() => {
-          navigate(`${ROUTES.location}/gachongwan`)
-        }}>가천관</button>
+        <button
+          className={styles.mapButton7}
+          onClick={() => {
+            navigate(`${ROUTES.locationga}`);
+          }}
+        >
+          가천관
+        </button>
         <button className={styles.mapButton8}>전정도</button>
         <button className={styles.mapButton9}>바나연</button>
         <button className={styles.mapButton10}>비타</button>

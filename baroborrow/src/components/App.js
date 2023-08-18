@@ -7,6 +7,7 @@ import Signin from "./Signin";
 import Write from "./Write";
 import Mypage from "./Mypage";
 import LocationPage from "./LocationPage";
+import Watch from "./Watch";
 
 /* import Watch from "./Watch"; */
 
@@ -19,9 +20,8 @@ function App() {
         <Route path={ROUTES.signin} element={<Signin />} />
         <Route path={ROUTES.write} element={<Write />} />
         <Route path={ROUTES.mypage} element={<Mypage />} />
-        <Route path={ROUTES.location} element={<LocationPage />} />
-        {/* <Route path={ROUTES.watch} element={<Watch />} />
- */}
+        <Route path={ROUTES.locationga} element={<LocationPage />} />
+        <Route path={ROUTES.watch} element={<Watch />} />
       </Routes>
     </BrowserRouter>
   );

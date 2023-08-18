@@ -1,5 +1,6 @@
 export const ROUTES = {
   location: "/location/:location",
+  locationga: "/locationpage",
   mypage: "/mypage",
   write: "/write",
   watch: "/watch",
@@ -8,5 +9,5 @@ export const ROUTES = {
 };
 
 export const LocationNameByKey = {
-  'gachongwan': '가천관',
-}
+  gachongwan: "가천관",
+};
