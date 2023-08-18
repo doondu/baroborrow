@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react"
 import {  BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 import styles from "./main.module.css";
+import map from "./image/map.png";
 import axios from "axios";
 
 const Main = () => {
@@ -41,7 +42,9 @@ const Main = () => {
                     </span> 
                 </div> 
             </div>
-       
+            <div className="map">
+            <img src={map}></img>
+            </div>
         </div>
     );
 };
